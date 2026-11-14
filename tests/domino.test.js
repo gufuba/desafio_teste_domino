@@ -222,6 +222,13 @@ describe('Jogar uma peca', () => {
     expect(() => jogo.jogar(1, [3, 6], 'direita')).toThrow('Jogada invalida');
   });
 
+  test('rejeita peca em formato invalido', () => {
+    const jogo = situacao({ mesa: [[3, 4]], maos: [[[4, 5]], [[0, 0]]] });
+    expect(() => jogo.jogar(1, [7, 7], 'direita')).toThrow('Jogada invalida');
+    expect(() => jogo.jogar(1, 'ficha', 'direita')).toThrow('Jogada invalida');
+    expect(() => jogo.jogar(1, undefined, 'direita')).toThrow('Jogada invalida');
+  });
+
   test('rejeita peca que nao encaixa na ponta escolhida', () => {
     const jogo = situacao({ mesa: [[3, 4]], maos: [[[4, 5]], [[0, 0]]] });
     expect(() => jogo.jogar(1, [4, 5], 'esquerda')).toThrow('Jogada invalida');
